@@ -12,7 +12,7 @@ DELETE FROM Department;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
-LOAD DATA LOCAL INFILE 'C:\Users\giahu\Documents\Workspace\CSDS-341-Final-Project\dataset\dataset\department.csv'
+LOAD DATA LOCAL INFILE 'put your path to the dataset (department.csv) in the project here'
 INTO TABLE Department
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -20,7 +20,7 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (deptID, deptName);
 
-LOAD DATA LOCAL INFILE 'C:/full/path/to/project/data/centers.csv'
+LOAD DATA LOCAL INFILE 'put your path to the dataset (center.csv) in the project here'
 INTO TABLE Center
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -28,7 +28,7 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (centerID, centerName, country, budget);
 
-LOAD DATA LOCAL INFILE 'C:\Users\giahu\Documents\Workspace\CSDS-341-Final-Project\dataset\dataset\center.csv'
+LOAD DATA LOCAL INFILE 'put your path to the dataset (employee.csv) in the project here'
 INTO TABLE Employee
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -36,7 +36,7 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (employeeID, firstName, lastName, gender, startDate, annualSalary, centerID, deptID);
 
-LOAD DATA LOCAL INFILE 'C:\Users\giahu\Documents\Workspace\CSDS-341-Final-Project\dataset\dataset\supervisor.csv'
+LOAD DATA LOCAL INFILE 'put your path to the dataset (supervisor.csv) in the project here'
 INTO TABLE Supervisor
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -44,7 +44,7 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (employeeID, title);
 
-LOAD DATA LOCAL INFILE 'C:\Users\giahu\Documents\Workspace\CSDS-341-Final-Project\dataset\dataset\project.csv'
+LOAD DATA LOCAL INFILE 'put your path to the dataset (project.csv) in the project here'
 INTO TABLE Project
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -52,7 +52,7 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (projectID, projectName, startDate, deadline, active, supervisorID);
 
-LOAD DATA LOCAL INFILE 'C:\Users\giahu\Documents\Workspace\CSDS-341-Final-Project\dataset\dataset\task.csv'
+LOAD DATA LOCAL INFILE 'put your path to the dataset (task.csv) in the project here'
 INTO TABLE Task
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -60,7 +60,7 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (taskID, taskName, status, deadline, projectID);
 
-LOAD DATA LOCAL INFILE 'C:\Users\giahu\Documents\Workspace\CSDS-341-Final-Project\dataset\dataset\assignedTo.csv'
+LOAD DATA LOCAL INFILE 'put your path to the dataset (assignedTo.csv) in the project here'
 INTO TABLE AssignedTo
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
