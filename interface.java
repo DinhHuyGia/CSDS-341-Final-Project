@@ -21,9 +21,9 @@ import java.util.Scanner;
 class DBInterface {
 
     private static final String JDBC_URL =
-            "jdbc:mysql://localhost:3306/YOUR_DATABASE_NAME?useSSL=false&serverTimezone=UTC";
+            "jdbc:mysql://localhost:3306/company_db?useSSL=false&serverTimezone=UTC";
     private static final String USER = "root";
-    private static final String PASSWORD = "";
+    private static final String PASSWORD = "Huykhang2005";
 
     /**
      * Premade queries: index 0 → id 1 in the menu. Edit labels and SQL as needed.
