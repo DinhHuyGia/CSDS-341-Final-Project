@@ -23,7 +23,7 @@ class DBInterface {
     private static final String JDBC_URL =
             "jdbc:mysql://localhost:3306/company_db?useSSL=false&serverTimezone=UTC";
     private static final String USER = "root";
-    private static final String PASSWORD = "Huykhang2005";
+    private static final String PASSWORD = "";
 
     /**
      * Premade queries: index 0 → id 1 in the menu. Edit labels and SQL as needed.
