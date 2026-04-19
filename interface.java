@@ -14,11 +14,11 @@ import java.util.Scanner;
  * <p>Compile / run:
  * <pre>
  * javac -cp ".:mysql-connector-j-9.1.0.jar" interface.java
- * java -cp ".:mysql-connector-j-9.1.0.jar" ProjectDB        # interactive menu
- * java -cp ".:mysql-connector-j-9.1.0.jar" ProjectDB 2     # run query #2
+ * java -cp ".:mysql-connector-j-9.1.0.jar" DBInterface        # interactive menu
+ * java -cp ".:mysql-connector-j-9.1.0.jar" DBInterface 2     # run query #2
  * </pre>
  */
-class ProjectDB {
+class DBInterface {
 
     private static final String JDBC_URL =
             "jdbc:mysql://localhost:3306/YOUR_DATABASE_NAME?useSSL=false&serverTimezone=UTC";
@@ -39,7 +39,7 @@ class ProjectDB {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             System.err.println("mysql-connector-j is not on the classpath.");
-            e.printStackTrace();
+            System.err.println("Details: " + e.getMessage());
             return;
         }
 
@@ -100,7 +100,7 @@ class ProjectDB {
                 ResultSet rs = stmt.executeQuery(sql)) {
             printResultSet(rs);
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("Failed to run query #" + id + ": " + e.getMessage());
         }
     }
 
