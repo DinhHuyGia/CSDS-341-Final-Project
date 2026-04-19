@@ -1,0 +1,61 @@
+centerID,centerName,country,budget
+1,North Atlantic Operations Hub,United States,2629517
+2,Pacific Rim Operations Hub,Canada,3009034
+3,Central Europe Operations Hub,United Kingdom,3388551
+4,Nordic Operations Hub,Germany,3768068
+5,Mediterranean Operations Hub,France,4147585
+6,Southeast Asia Operations Hub,Japan,4527102
+7,Gulf Operations Hub,Australia,4906619
+8,Andean Operations Hub,Brazil,5286136
+9,Southern Africa Operations Hub,India,5665653
+10,Central Asia Operations Hub,Singapore,6045170
+11,North Atlantic Distribution Center,Netherlands,6424687
+12,Pacific Rim Distribution Center,Sweden,6804204
+13,Central Europe Distribution Center,Italy,7183721
+14,Nordic Distribution Center,Spain,7563238
+15,Mediterranean Distribution Center,Mexico,7942755
+16,Southeast Asia Distribution Center,South Korea,8322272
+17,Gulf Distribution Center,Poland,8701789
+18,Andean Distribution Center,United Arab Emirates,9081306
+19,Southern Africa Distribution Center,South Africa,9460823
+20,Central Asia Distribution Center,Argentina,9840340
+21,North Atlantic Regional Office,Ireland,10219857
+22,Pacific Rim Regional Office,Norway,10599374
+23,Central Europe Regional Office,United States,10978891
+24,Nordic Regional Office,Canada,11358408
+25,Mediterranean Regional Office,United Kingdom,11737925
+26,Southeast Asia Regional Office,Germany,12117442
+27,Gulf Regional Office,France,12496959
+28,Andean Regional Office,Japan,12876476
+29,Southern Africa Regional Office,Australia,13255993
+30,Central Asia Regional Office,Brazil,13635510
+31,North Atlantic Innovation Campus,India,14015027
+32,Pacific Rim Innovation Campus,Singapore,14394544
+33,Central Europe Innovation Campus,Netherlands,14774061
+34,Nordic Innovation Campus,Sweden,15153578
+35,Mediterranean Innovation Campus,Italy,15533095
+36,Southeast Asia Innovation Campus,Spain,15912612
+37,Gulf Innovation Campus,Mexico,16292129
+38,Andean Innovation Campus,South Korea,16671646
+39,Southern Africa Innovation Campus,Poland,17051163
+40,Central Asia Innovation Campus,United Arab Emirates,17430680
+41,North Atlantic Logistics Terminal,South Africa,17810197
+42,Pacific Rim Logistics Terminal,Argentina,18189714
+43,Central Europe Logistics Terminal,Ireland,18569231
+44,Nordic Logistics Terminal,Norway,18948748
+45,Mediterranean Logistics Terminal,United States,19328265
+46,Southeast Asia Logistics Terminal,Canada,19707782
+47,Gulf Logistics Terminal,United Kingdom,20087299
+48,Andean Logistics Terminal,Germany,20466816
+49,Southern Africa Logistics Terminal,France,20846333
+50,Central Asia Logistics Terminal,Japan,21225850
+51,North Atlantic Service Center,Australia,21605367
+52,Pacific Rim Service Center,Brazil,21984884
+53,Central Europe Service Center,India,22364401
+54,Nordic Service Center,Singapore,22743918
+55,Mediterranean Service Center,Netherlands,23123435
+56,Southeast Asia Service Center,Sweden,23502952
+57,Gulf Service Center,Italy,23882469
+58,Andean Service Center,Spain,24261986
+59,Southern Africa Service Center,Mexico,24641503
+60,Central Asia Service Center,South Korea,2521020
