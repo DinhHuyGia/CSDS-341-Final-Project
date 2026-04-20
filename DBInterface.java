@@ -23,16 +23,92 @@ class DBInterface {
     private static final String JDBC_URL =
             "jdbc:mysql://localhost:3306/company_db?useSSL=false&serverTimezone=UTC";
     private static final String USER = "root";
-    private static final String PASSWORD = "";
+    private static final String PASSWORD = "Huykhang2005";
 
     /**
      * Premade queries: index 0 → id 1 in the menu. Edit labels and SQL as needed.
      */
     private static final String[][] QUERY_CATALOG = {
-        {"Show all tables", "SHOW TABLES"},
-        {"Count employees", "SELECT COUNT(*) AS employee_count FROM Employee"},
-        {"Employees (first 15)", "SELECT employeeID, firstName, lastName, annualSalary FROM Employee LIMIT 15"},
-    };
+    {"Show all tables",
+        "SHOW TABLES"},
+
+    {"Easy 1 - Employee count by department",
+        "SELECT d.departmentName, COUNT(*) AS employeeCount " +
+        "FROM Employee e, Department d " +
+        "WHERE e.departmentID = d.departmentID " +
+        "GROUP BY d.departmentName"},
+
+    {"Easy 2 - Employees in Human Resources Department",
+        "SELECT e.* " +
+        "FROM Employee e, Department d " +
+        "WHERE e.departmentID = d.departmentID " +
+        "AND d.departmentName = 'Human Resources'"},
+
+    {"Easy 3 - Employee count by country",
+        "SELECT c.country, COUNT(*) AS employeeCount " +
+        "FROM Employee e, Center c " +
+        "WHERE e.centerID = c.centerID " +
+        "GROUP BY c.country"},
+
+    {"Easy 4 - Egypt North QA employees with salary over 12000",
+        "SELECT COUNT(*) AS qualifiedEmployees " +
+        "FROM Employee e, Center c, Department d " +
+        "WHERE e.centerID = c.centerID " +
+        "AND e.departmentID = d.departmentID " +
+        "AND c.country = 'Egypt' " +
+        "AND c.centerName = 'North' " +
+        "AND d.departmentName = 'Quality Assurance' " +
+        "AND e.annualSalary > 12000"},
+
+    {"Medium 1 - Project count for Emma Smith",
+        "SELECT e.firstName, e.lastName, COUNT(a.projectID) AS projectCount " +
+        "FROM Employee e, AssignedTo a " +
+        "WHERE e.employeeID = a.employeeID " +
+        "AND e.firstName = 'Emma' " +
+        "AND e.lastName = 'Smith' " +
+        "GROUP BY e.firstName, e.lastName"},
+
+    {"Medium 2 - Projects overseen by Oliver Bell",
+        "SELECT p.projectName, p.deadline " +
+        "FROM Project p, Employee e " +
+        "WHERE p.supervisorID = e.employeeID " +
+        "AND e.firstName = 'Oliver' " +
+        "AND e.lastName = 'Bell'"},
+
+    {"Medium 3 - Projects under Quality Assurance supervisors",
+        "SELECT DISTINCT p.projectID, p.projectName " +
+        "FROM Project p, Employee e, Department d " +
+        "WHERE p.supervisorID = e.employeeID " +
+        "AND e.departmentID = d.departmentID " +
+        "AND d.departmentName = 'Quality Assurance'"},
+
+    {"Medium 4 - Average salary in Quality Assurance",
+        "SELECT d.departmentName, AVG(e.annualSalary) AS avgSalary " +
+        "FROM Employee e, Department d " +
+        "WHERE e.departmentID = d.departmentID " +
+        "AND d.departmentName = 'Quality Assurance' " +
+        "GROUP BY d.departmentName"},
+
+    {"Hard 1 - Employees not assigned to any project",
+        "SELECT e.employeeID, e.firstName, e.lastName " +
+        "FROM Employee e " +
+        "WHERE NOT EXISTS ( " +
+        "    SELECT * " +
+        "    FROM AssignedTo a " +
+        "    WHERE a.employeeID = e.employeeID" +
+        ")"},
+
+    {"Hard 2 - Supervisors with no active projects",
+        "SELECT e.employeeID, e.firstName, e.lastName " +
+        "FROM Supervisor s, Employee e " +
+        "WHERE s.supervisorID = e.employeeID " +
+        "AND NOT EXISTS ( " +
+        "    SELECT * " +
+        "    FROM Project p " +
+        "    WHERE p.supervisorID = s.supervisorID " +
+        "    AND p.active = TRUE" +
+        ")"}
+};
 
     public static void main(String[] args) {
         try {
@@ -124,24 +200,68 @@ class DBInterface {
         ResultSetMetaData meta = rs.getMetaData();
         int columnCount = meta.getColumnCount();
 
-        StringBuilder header = new StringBuilder();
-        for (int c = 1; c <= columnCount; c++) {
-            if (c > 1) {
-                header.append("\t");
-            }
-            header.append(meta.getColumnLabel(c));
+        // Store column widths
+        int[] columnWidths = new int[columnCount];
+
+        // Initialize with column name lengths
+        for (int i = 1; i <= columnCount; i++) {
+            columnWidths[i - 1] = meta.getColumnLabel(i).length();
         }
-        System.out.println(header);
+
+        // Store rows
+        java.util.List<String[]> rows = new java.util.ArrayList<>();
 
         while (rs.next()) {
-            StringBuilder row = new StringBuilder();
-            for (int c = 1; c <= columnCount; c++) {
-                if (c > 1) {
-                    row.append("\t");
-                }
-                row.append(rs.getString(c));
+            String[] row = new String[columnCount];
+            for (int i = 1; i <= columnCount; i++) {
+                String value = rs.getString(i);
+                if (value == null) value = "NULL";
+                row[i - 1] = value;
+
+                columnWidths[i - 1] = Math.max(columnWidths[i - 1], value.length());
             }
-            System.out.println(row);
+            rows.add(row);
         }
+
+        // Print separator
+        printSeparator(columnWidths);
+
+        // Print header
+        System.out.print("|");
+        for (int i = 1; i <= columnCount; i++) {
+            String colName = meta.getColumnLabel(i);
+            System.out.print(" " + padRight(colName, columnWidths[i - 1]) + " |");
+        }
+        System.out.println();
+
+        // Print separator
+        printSeparator(columnWidths);
+
+        // Print rows
+        for (String[] row : rows) {
+            System.out.print("|");
+            for (int i = 0; i < columnCount; i++) {
+                System.out.print(" " + padRight(row[i], columnWidths[i]) + " |");
+            }
+            System.out.println();
+        }
+
+        // Print separator
+        printSeparator(columnWidths);
     }
+
+    private static void printSeparator(int[] widths) {
+        System.out.print("+");
+        for (int w : widths) {
+            for (int i = 0; i < w + 2; i++) {
+                System.out.print("-");
+            }
+        System.out.print("+");
+    }
+    System.out.println();
+}
+
+    private static String padRight(String text, int width) {
+        return String.format("%-" + width + "s", text);
+    } 
 }
