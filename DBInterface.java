@@ -13,9 +13,9 @@ import java.util.Scanner;
  *
  * <p>Compile / run:
  * <pre>
- * javac -cp ".:mysql-connector-j-9.1.0.jar" interface.java
- * java -cp ".:mysql-connector-j-9.1.0.jar" DBInterface        # interactive menu
- * java -cp ".:mysql-connector-j-9.1.0.jar" DBInterface 2     # run query #2
+ * javac -cp ".:mysql-connector-j-9.6.0.jar" interface.java
+ * java -cp ".:mysql-connector-j-9.6.0.jar" DBInterface        # interactive menu
+ * java -cp ".:mysql-connector-j-9.6.0.jar" DBInterface 2     # run query #2
  * </pre>
  */
 class DBInterface {
@@ -23,7 +23,7 @@ class DBInterface {
     private static final String JDBC_URL =
             "jdbc:mysql://localhost:3306/company_db?useSSL=false&serverTimezone=UTC";
     private static final String USER = "root";
-    private static final String PASSWORD = "Huykhang2005";
+    private static final String PASSWORD = "YOUR_PASSWORD";
 
     /**
      * Premade queries: index 0 → id 1 in the menu. Edit labels and SQL as needed.
@@ -32,25 +32,25 @@ class DBInterface {
     {"Show all tables",
         "SHOW TABLES"},
 
-    {"Easy 1 - Employee count by department",
+    {"Employee count by department",
         "SELECT d.departmentName, COUNT(*) AS employeeCount " +
         "FROM Employee e, Department d " +
         "WHERE e.departmentID = d.departmentID " +
         "GROUP BY d.departmentName"},
 
-    {"Easy 2 - Employees in Human Resources Department",
+    {"Employees in Human Resources Department",
         "SELECT e.* " +
         "FROM Employee e, Department d " +
         "WHERE e.departmentID = d.departmentID " +
         "AND d.departmentName = 'Human Resources'"},
 
-    {"Easy 3 - Employee count by country",
+    {"Employee count by country",
         "SELECT c.country, COUNT(*) AS employeeCount " +
         "FROM Employee e, Center c " +
         "WHERE e.centerID = c.centerID " +
         "GROUP BY c.country"},
 
-    {"Easy 4 - Egypt North QA employees with salary over 12000",
+    {"Egypt North QA employees with salary over 12000",
         "SELECT COUNT(*) AS qualifiedEmployees " +
         "FROM Employee e, Center c, Department d " +
         "WHERE e.centerID = c.centerID " +
@@ -60,7 +60,7 @@ class DBInterface {
         "AND d.departmentName = 'Quality Assurance' " +
         "AND e.annualSalary > 12000"},
 
-    {"Medium 1 - Project count for Emma Smith",
+    {"Project count for Emma Smith",
         "SELECT e.firstName, e.lastName, COUNT(a.projectID) AS projectCount " +
         "FROM Employee e, AssignedTo a " +
         "WHERE e.employeeID = a.employeeID " +
@@ -68,28 +68,28 @@ class DBInterface {
         "AND e.lastName = 'Smith' " +
         "GROUP BY e.firstName, e.lastName"},
 
-    {"Medium 2 - Projects overseen by Oliver Bell",
+    {"Projects overseen by Oliver Bell",
         "SELECT p.projectName, p.deadline " +
         "FROM Project p, Employee e " +
         "WHERE p.supervisorID = e.employeeID " +
         "AND e.firstName = 'Oliver' " +
         "AND e.lastName = 'Bell'"},
 
-    {"Medium 3 - Projects under Quality Assurance supervisors",
+    {"Projects under Quality Assurance supervisors",
         "SELECT DISTINCT p.projectID, p.projectName " +
         "FROM Project p, Employee e, Department d " +
         "WHERE p.supervisorID = e.employeeID " +
         "AND e.departmentID = d.departmentID " +
         "AND d.departmentName = 'Quality Assurance'"},
 
-    {"Medium 4 - Average salary in Quality Assurance",
+    {"Average salary in Quality Assurance",
         "SELECT d.departmentName, AVG(e.annualSalary) AS avgSalary " +
         "FROM Employee e, Department d " +
         "WHERE e.departmentID = d.departmentID " +
         "AND d.departmentName = 'Quality Assurance' " +
         "GROUP BY d.departmentName"},
 
-    {"Hard 1 - Employees not assigned to any project",
+    {"Employees not assigned to any project",
         "SELECT e.employeeID, e.firstName, e.lastName " +
         "FROM Employee e " +
         "WHERE NOT EXISTS ( " +
@@ -98,7 +98,7 @@ class DBInterface {
         "    WHERE a.employeeID = e.employeeID" +
         ")"},
 
-    {"Hard 2 - Supervisors with no active projects",
+    {"Supervisors with no active projects",
         "SELECT e.employeeID, e.firstName, e.lastName " +
         "FROM Supervisor s, Employee e " +
         "WHERE s.supervisorID = e.employeeID " +
@@ -130,7 +130,7 @@ class DBInterface {
         try (Scanner scanner = new Scanner(System.in)) {
             while (true) {
                 printMenu();
-                System.out.print("Enter query id (1–" + QUERY_CATALOG.length + ", 0 = quit): ");
+                System.out.print("Enter query id (1-" + QUERY_CATALOG.length + ", 0 = quit): ");
                 if (!scanner.hasNextLine()) {
                     return;
                 }
@@ -147,7 +147,7 @@ class DBInterface {
                     return;
                 }
                 if (choice < 1 || choice > QUERY_CATALOG.length) {
-                    System.err.println("Invalid id. Choose 1–" + QUERY_CATALOG.length + " or 0.");
+                    System.err.println("Invalid id. Choose 1-" + QUERY_CATALOG.length + " or 0.");
                     continue;
                 }
                 runCatalogQuery(choice);
@@ -168,7 +168,7 @@ class DBInterface {
     private static void runCatalogQuery(int id) {
         String sql = sqlForId(id);
         if (sql == null) {
-            System.err.println("No query with id " + id + ". Valid: 1–" + QUERY_CATALOG.length + ".");
+            System.err.println("No query with id " + id + ". Valid: 1-" + QUERY_CATALOG.length + ".");
             return;
         }
         try (Connection conn = DriverManager.getConnection(JDBC_URL, USER, PASSWORD);
@@ -181,7 +181,7 @@ class DBInterface {
     }
 
     private static void printMenu() {
-        System.out.println("--- Saved queries ---");
+        System.out.println("--- Menu ---");
         for (int i = 0; i < QUERY_CATALOG.length; i++) {
             System.out.println((i + 1) + ". " + QUERY_CATALOG[i][0]);
         }
