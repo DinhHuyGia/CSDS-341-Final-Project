@@ -23,7 +23,7 @@ class DBInterface {
     private static final String JDBC_URL =
             "jdbc:mysql://localhost:3306/company_db?useSSL=false&serverTimezone=UTC";
     private static final String USER = "root";
-    private static final String PASSWORD = "YOUR_PASSWORD";
+    private static final String PASSWORD = "Huykhang2005";
 
     /**
      * Premade queries: index 0 → id 1 in the menu. Edit labels and SQL as needed.
@@ -50,13 +50,13 @@ class DBInterface {
         "WHERE e.centerID = c.centerID " +
         "GROUP BY c.country"},
 
-    {"Egypt North QA employees with salary over 12000",
+    {"How many US North Atlantic Operations Hub QA employees with salary over 12000",
         "SELECT COUNT(*) AS qualifiedEmployees " +
         "FROM Employee e, Center c, Department d " +
         "WHERE e.centerID = c.centerID " +
         "AND e.departmentID = d.departmentID " +
-        "AND c.country = 'Egypt' " +
-        "AND c.centerName = 'North' " +
+        "AND c.country = 'United States' " +
+        "AND c.centerName = 'North Atlantic Operations Hub' " +
         "AND d.departmentName = 'Quality Assurance' " +
         "AND e.annualSalary > 12000"},
 
