@@ -13,9 +13,9 @@ import java.util.Scanner;
  *
  * <p>Compile / run:
  * <pre>
- * javac -cp ".:mysql-connector-j-9.6.0.jar" interface.java
- * java -cp ".:mysql-connector-j-9.6.0.jar" DBInterface        # interactive menu
- * java -cp ".:mysql-connector-j-9.6.0.jar" DBInterface 2     # run query #2
+ * javac -cp ".;mysql-connector-j-9.6.0.jar" interface.java
+ * java -cp ".;mysql-connector-j-9.6.0.jar" DBInterface        # interactive menu
+ * java -cp ".;mysql-connector-j-9.6.0.jar" DBInterface 2     # run query #2
  * </pre>
  */
 class DBInterface {
