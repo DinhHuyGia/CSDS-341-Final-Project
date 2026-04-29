@@ -18,7 +18,7 @@ FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
-(deptID, deptName);
+(departmentID, departmentName);
 
 LOAD DATA LOCAL INFILE 'put your path to the dataset (center.csv) in the project here'
 INTO TABLE Center
@@ -34,7 +34,9 @@ FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
-(employeeID, firstName, lastName, gender, startDate, annualSalary, centerID, deptID);
+(employeeID, firstName, lastName, gender, startDate, annualSalary, @departmentID, @centerID)
+SET centerID = @centerID,
+    departmentID = @departmentID;
 
 LOAD DATA LOCAL INFILE 'put your path to the dataset (supervisor.csv) in the project here'
 INTO TABLE Supervisor
@@ -42,7 +44,7 @@ FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
-(employeeID, title);
+(supervisorID, title);
 
 LOAD DATA LOCAL INFILE 'put your path to the dataset (project.csv) in the project here'
 INTO TABLE Project
@@ -58,7 +60,7 @@ FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
-(taskID, taskName, status, deadline, projectID);
+(projectID, taskID, taskName, status, deadline);
 
 LOAD DATA LOCAL INFILE 'put your path to the dataset (assignedTo.csv) in the project here'
 INTO TABLE AssignedTo
@@ -66,7 +68,7 @@ FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
-(employeeID, projectID, role, hours);
+(employeeID, projectID, hours, role);
 
 SELECT COUNT(*) AS dept_count FROM Department;
 SELECT COUNT(*) AS center_count FROM Center;
