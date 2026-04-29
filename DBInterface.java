@@ -50,6 +50,25 @@ class DBInterface {
         "WHERE e.centerID = c.centerID " +
         "GROUP BY c.country"},
 
+    {"All supervisors in Human Resources",
+        "SELECT e.* " + 
+        "FROM Employee e, Department d, Supervisor s " +
+        "WHERE s.supervisorID = e.employeeID " +
+        "AND e.departmentID = d.departmentID " +
+        "AND d.departmentName = 'Human Resources Department'"},
+        
+    {"Number of employees in Germany",
+        "SELECT COUNT(*) AS employeeCount " +
+        "FROM Employee e, Center c " +
+        "WHERE e.centerID = c.centerID " +
+        "AND c.country = 'Germany' "},
+
+    {"Information of employees with at least 20 years of experience",
+        "SELECT e.firstName, e.lastName, e.annualSalary, d.departmentName " +
+        "FROM Employee e " +
+        "JOIN Department d ON e.departmentID = d.departmentID " +
+        "WHERE TIMESTAMPDIFF(YEAR, e.startDate, CURDATE()) >= 20 " },
+
     {"How many US North Atlantic Operations Hub QA employees with salary over 12000",
         "SELECT COUNT(*) AS qualifiedEmployees " +
         "FROM Employee e, Center c, Department d " +
