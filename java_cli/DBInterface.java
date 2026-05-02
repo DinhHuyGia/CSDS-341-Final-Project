@@ -1,3 +1,5 @@
+package java_cli;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,9 +15,8 @@ import java.util.Scanner;
  *
  * <p>Compile / run:
  * <pre>
- * javac -cp ".;mysql-connector-j-9.6.0.jar" DBInterface.java
- * java -cp ".;mysql-connector-j-9.6.0.jar" DBInterface        # interactive menu
- * java -cp ".;mysql-connector-j-9.6.0.jar" DBInterface 2      # run premade query #2
+ * javac -cp ".;lib/mysql-connector-j-9.6.0.jar" java_cli/DBInterface.java
+ * java -cp ".;lib/mysql-connector-j-9.6.0.jar;java_cli" DBInterface # interactive menu
  * </pre>
  */
 class DBInterface {
