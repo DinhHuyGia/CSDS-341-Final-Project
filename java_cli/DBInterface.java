@@ -24,7 +24,7 @@ class DBInterface {
     private static final String JDBC_URL =
             "jdbc:mysql://localhost:3306/company_db?useSSL=false&serverTimezone=UTC";
     private static final String USER = "root";
-    private static final String PASSWORD = "Huykhang2005";
+    private static final String PASSWORD = "your_mysql_password";
 
     private static final String[] BROWSABLE_TABLES = {
             "Department", "Center", "Employee", "Supervisor", "Project", "Task", "AssignedTo"
