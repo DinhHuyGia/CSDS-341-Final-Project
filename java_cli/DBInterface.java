@@ -16,7 +16,7 @@ import java.util.Scanner;
  * <p>Compile / run:
  * <pre>
  * javac -cp ".;lib/mysql-connector-j-9.6.0.jar" java_cli/DBInterface.java
- * java -cp ".;lib/mysql-connector-j-9.6.0.jar;java_cli" DBInterface # interactive menu
+ * java -cp ".;lib/mysql-connector-j-9.6.0.jar" java_cli.DBInterface # interactive menu
  * </pre>
  */
 class DBInterface {
@@ -24,7 +24,7 @@ class DBInterface {
     private static final String JDBC_URL =
             "jdbc:mysql://localhost:3306/company_db?useSSL=false&serverTimezone=UTC";
     private static final String USER = "root";
-    private static final String PASSWORD = "Huykhang2005";
+    private static final String PASSWORD = "your_password";
 
     private static final String[] BROWSABLE_TABLES = {
             "Department", "Center", "Employee", "Supervisor", "Project", "Task", "AssignedTo"
